@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 程 on 2018/8/7.
@@ -16,4 +18,7 @@ import java.util.List;
 
 public interface GoodsInfoService {
     List<Goodsinfo> findAll();
+    Goodsinfo findGoodsById(int goodid);
+    List<Goodsinfo> findGoodsByCategory(Integer categoryid,String orderby,int page);
+    List<Goodsinfo> findByCategory(Integer categoryid);
 }

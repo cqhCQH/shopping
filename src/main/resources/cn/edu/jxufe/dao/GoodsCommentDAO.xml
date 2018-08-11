@@ -31,9 +31,9 @@
       scomm_memberid, scomm_membername, scomm_memberavatar, 
       scomm_time, create_time, update_time
       )
-    values (#{scommId,jdbcType=INTEGER}, #{goodisId,jdbcType=INTEGER}, #{scommContent,jdbcType=VARCHAR}, 
+    values (#{scommId,jdbcType=INTEGER}, #{goodisId,jdbcType=INTEGER}, #{scommContent,jdbcType=VARCHAR},
       #{scommMemberid,jdbcType=INTEGER}, #{scommMembername,jdbcType=VARCHAR}, #{scommMemberavatar,jdbcType=VARCHAR}, 
-      #{scommTime,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      #{scommTime,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.jxufe.entity.GoodsComment">
@@ -139,4 +139,17 @@
       update_time = #{updateTime,jdbcType=BIGINT}
     where scomm_id = #{scommId,jdbcType=INTEGER}
   </update>
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT * FROM goods_comment
+  </select>
+
+  <select id="findByGoodsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM goods_comment
+    <where>
+      <if test="goodid!=null">
+        goodis_id=#{goodid}
+      </if>
+    </where>
+    ORDER BY scomm_time
+  </select>
 </mapper>

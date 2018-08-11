@@ -126,4 +126,13 @@
       adv_updatetime = #{advUpdatetime,jdbcType=TIMESTAMP}
     where adv_id = #{advId,jdbcType=INTEGER}
   </update>
+  <select id="findOnLineList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * from advertisement
+    <where>
+      <if test="map.advoffline!=null">
+        adv_offline=${map.advoffline}
+      </if>
+    </where>
+    ORDER BY  adv_order
+  </select>
 </mapper>

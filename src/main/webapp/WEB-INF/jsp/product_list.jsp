@@ -80,7 +80,7 @@ $(document).ready(function(){
   <ul>
    <li>
     <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods001.jpg"/>
+     <img src="../../upload/1.webp.jpg"/>
     </a>
     <div class="goodsInfor">
      <h2>
@@ -97,7 +97,7 @@ $(document).ready(function(){
    </li>
    <li>
     <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods002.jpg"/>
+     <img src="../../upload/2.webp.jpg"/>
     </a>
     <div class="goodsInfor">
      <h2>
@@ -114,7 +114,7 @@ $(document).ready(function(){
    </li>
    <li>
     <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods003.jpg"/>
+     <img src="../../upload/3.webp.jpg"/>
     </a>
     <div class="goodsInfor">
      <h2>
@@ -131,7 +131,7 @@ $(document).ready(function(){
    </li>
    <li>
     <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods005.jpg"/>
+     <img src="../../upload/5.webp.jpg"/>
     </a>
     <div class="goodsInfor">
      <h2>
@@ -148,7 +148,7 @@ $(document).ready(function(){
    </li>
    <li>
     <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods004.jpg"/>
+     <img src="../../upload/4.webp.jpg"/>
     </a>
     <div class="goodsInfor">
      <h2>

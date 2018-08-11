@@ -41,14 +41,14 @@ $(document).ready(function(){
  <h1>产品详情</h1>
 </header>
 <div class="pro_bigImg">
- <img src="../../upload/goods005.jpg"/>
+ <img src="upload/${g.goodsImage}"/>
 </div>
 <!--base information-->
 <section class="pro_baseInfor">
- <h2>飞翅琉璃对天鹅新房摆件家居装饰品婚房玻璃工艺品 结婚礼物 </h2>
+ <h2>${g.goodsName}</h2>
  <p>
-  <strong>88.90</strong>
-  <del>129.00</del>
+  <strong>${g.goodsSellPrice}</strong>
+  <del>${g.goodsPrice}</del>
   <a class="add_btn">加入购物车</a>
  </p>
 </section>
@@ -57,23 +57,23 @@ $(document).ready(function(){
  <ul>
   <li>
    <span>创建时间</span>
-   <span><time>2018-05-12</time></span>
+   <span><time>${g.createTime}</time></span>
   </li>
   <li>
    <span>设计者</span>
    <span>HZIT</span>
   </li>
-  <li class="more_link" onClick="location.href='comment.html'">
+  <li class="more_link" onClick="location.href='commentinfo${g.goodsId}'">
    <span>评论</span>
-   <span>共计<b>398</b>人点评</span>
+   <span>共计<b>${g.commentNum}</b>人点评</span>
   </li>
   <li>
    <span>成交</span>
-   <span>共计<b>632</b>笔</span>
+   <span>共计<b>${g.salenumNum}</b>笔</span>
   </li>
   <li>
    <span>点赞</span>
-   <span>共计<b>432</b>人</span>
+   <span>共计<b>${g.thumbsUpNum}</b>人</span>
   </li>
  </ul>
 </div>

@@ -1,6 +1,7 @@
 package cn.edu.jxufe.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 /**
  * goods_comment

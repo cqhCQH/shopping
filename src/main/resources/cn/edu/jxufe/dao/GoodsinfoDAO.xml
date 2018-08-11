@@ -284,4 +284,16 @@
   <select id="findAll" resultMap="BaseResultMap">
     SELECT * FROM goodsinfo
   </select>
+
+  <select id="findAllGoodsByPropery" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * FROM goodsinfo
+    <where>
+      <if test="goods.gcId!=null">
+        gc_id=#{goods.gcId}
+      </if>
+      <if test="goods.goodsName!=null">
+        goods_Name like cancat('%',goods.goodsName,'%')
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -25,6 +25,25 @@
 <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="../../css/style.css" />
 <script src="../../js/jquery.js"></script>
+ <script>
+  var goodsID;
+  function addComment(gid){
+
+   url="commentinfo"+gid;
+   var li=$(".model")
+   $post(url,function(data){
+       for(var i=0;i<data.length;i++){
+           goodsID=data[i].goodsId;
+           li.find(".user_infor").find("span:eq(0)").find("img").attr("src","upload/"+data[i].scommMemberavatar);
+           li.find(".user_infor").find("span:eq(1)").find("em").html(data[i].scommMembername);
+           li.find(".user_infor").find("span:eq(1)").find("time").html(data[i].createTime);
+           li.find(".comment_cont_txt").html(data[i].scommContent);
+          $(".comment_cont ul").append("<li>"+li.html()+"</li>");
+       }
+   })
+  }
+
+ </script>
 </head>
 <body>
 <!--header-->
@@ -33,32 +52,23 @@
  <h1>点评</h1>
 </header>
 <div class="comment_input">
- <textarea placeholder="输入评论内容..."></textarea>
- <input type="button" value="评论"/>
+ <textarea placeholder="输入评论内容..." name="context"></textarea>
+ <input type="button" value="评论" onclick="location.href='addComment?=${goodsID}'"/>
 </div>
 <div class="comment_cont">
  <ul>
-  <li>
+  <li class="model">
    <div class="user_infor">
-    <span class="user_pic"><img src="../../images/icon/DefaultAvatar.jpg"/></span>
+    <span class="user_pic"><img src="${c.scommMemberavatar}"/></span>
     <span class="rt_infor">
-     <em>HZIT</em>
-     <time>2018-05-12 16:01:38</time>
+     <em>${c.scommMembername}</em>
+     <time>${c.createTime}</time>
     </span>
    </div>
-   <div class="comment_cont_txt">这里是用户评论的信息。。。</div>
-  </li>
-  <li>
-   <div class="user_infor">
-    <span class="user_pic"><img src="../../images/icon/DefaultAvatar.jpg"/></span>
-    <span class="rt_infor">
-     <em>张三</em>
-     <time>2018-05-12 16:01:38</time>
-    </span>
-   </div>
-   <div class="comment_cont_txt">这里是用户评论的这里是用户评论的信息这里是用户评论的信息这里是用户评论的信息信息。。。</div>
+   <div class="comment_cont_txt">${c.scommContent}</div>
   </li>
  </ul>
 </div>
+
 </body>
 </html>

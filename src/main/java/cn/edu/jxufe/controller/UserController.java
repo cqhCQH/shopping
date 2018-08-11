@@ -16,7 +16,7 @@ public class UserController {
 
     @RequestMapping("boy")
     public  String xiaoshuaige(){
-      return "index";
+      return "comment";
   }
 
     @RequestMapping("page")

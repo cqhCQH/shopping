@@ -83,7 +83,7 @@ $(document).ready(function(){
  </dt>
  <dd>
   <input type="checkbox"/>
-  <a href="product.jsp" class="goodsPic"><img src="../../upload/goods004.jpg"/></a>
+  <a href="product.jsp" class="goodsPic"><img src="../../upload/4.webp.jpg"/></a>
   <div class="goodsInfor">
    <h2>
     <a href="product.jsp">聚财貔貅风水摆件</a>
@@ -103,7 +103,7 @@ $(document).ready(function(){
  </dd>
  <dd>
   <input type="checkbox"/>
-  <a href="product.jsp" class="goodsPic"><img src="../../upload/goods002.jpg"/></a>
+  <a href="product.jsp" class="goodsPic"><img src="../../upload/2.webp.jpg"/></a>
   <div class="goodsInfor">
    <h2>
     <a href="product.jsp">烟灰缸 玻璃工艺品...</a>
@@ -123,7 +123,7 @@ $(document).ready(function(){
  </dd>
  <dd>
   <input type="checkbox"/>
-  <a href="product.jsp" class="goodsPic"><img src="../../upload/goods003.jpg"/></a>
+  <a href="product.jsp" class="goodsPic"><img src="../../upload/3.webp.jpg"/></a>
   <div class="goodsInfor">
    <h2>
     <a href="product.jsp">迷你花杯 送底座</a>
