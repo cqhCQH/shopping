@@ -28,12 +28,28 @@
 <script>
 $(document).ready(function(){
    $(".formarea li:last input[type='button']").click(function(){
-	   alert("测试跳转效果，程序对接予以删除!");
-	   location.href="index.jsp";
-	   });	
+
+    $("#bt_login").click(function(){
+     var tel = $("#tel").val();
+     var pwd = $("#mpwd").val();
+     var data={"tel":tel,"pwd":pwd};
+     $.getJSON("/login1",data,function(result){
+      if(result.sign==0){
+       alert("登陆成功");
+       self.location.href="index"
+      }else{
+       alert("账户密码错误");
+       self.location.href="login"
+      }
+     })
+    });
+    $("#zhuce").click(function(){
+    });
+   });
 });
 </script>
 </head>
+
 <body>
 <header>
  <a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
@@ -42,18 +58,18 @@ $(document).ready(function(){
 <ul class="formarea">
  <li>
   <label class="lit">账号：</label>
-  <input type="text" placeholder="手机号码" class="textbox"/>
+  <input type="text" placeholder="手机号码"  id="tel" class="textbox"/>
  </li>
  <li>
   <label class="lit">密码：</label>
-  <input type="password" placeholder="登陆密码" class="textbox"/>
+  <input type="password" placeholder="登陆密码" id="mpwd" class="textbox"/>
  </li>
  <li class="liLink">
-  <a href="register.jsp" class="fl">新用户注册</a>
-  <a href="find_pwd.jsp" class="fr">忘记密码?</a>
+  <a href="page_register" class="fl">新用户注册</a>
+  <a href="page_find_pwd" class="fr">忘记密码?</a>
  </li>
  <li>
-  <input type="button" value="立即登录"/>
+  <input type="button" value="立即登录"  id="bt_login"/>
  </li>
 </ul>
 <!--fixedNav:footer-->

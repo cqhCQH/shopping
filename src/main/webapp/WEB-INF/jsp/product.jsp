@@ -41,7 +41,7 @@ $(document).ready(function(){
  <h1>产品详情</h1>
 </header>
 <div class="pro_bigImg">
- <img src="upload/${g.goodsImage}"/>
+ <img src="${g.goodsImage}"/>
 </div>
 <!--base information-->
 <section class="pro_baseInfor">
@@ -61,7 +61,7 @@ $(document).ready(function(){
   </li>
   <li>
    <span>设计者</span>
-   <span>HZIT</span>
+   <span>${u}</span>
   </li>
   <li class="more_link" onClick="location.href='commentinfo${g.goodsId}'">
    <span>评论</span>

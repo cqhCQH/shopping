@@ -51,7 +51,6 @@
 
     function feiru(obj) {
       $(".hoverCart a").html(parseInt($(".hoverCart a").html()) + 1);
-      /*测试+1*/
       var shopOffset = $(".hoverCart").offset();
       var cloneDiv = obj.parent().siblings(".goodsPic").clone();
       var proOffset = obj.parent().siblings(".goodsPic").offset();
@@ -75,7 +74,7 @@
 <header>
   <a href="location.jsp" class="location">深圳市</a>
   <h1>合众饰品专卖</h1>
-  <a href="search.jsp" class="rt_searchIcon">&#37;</a>
+  <a href="search" class="rt_searchIcon">&#37;</a>
 </header>
 <!--slide-->
 <div class="slide">
@@ -100,7 +99,7 @@
       <li>
         <div class="productArea">
           <a href="goodsinfo${g.goodsId}" class="goodsPic">
-            <img src="upload/${g.goodsImage}"/>
+            <img src="${g.goodsImage}"/>
           </a>
           <div class="goodsInfor">
             <h2>
@@ -127,14 +126,14 @@
 </dl>
 <!--floatCart-->
 <div class="hoverCart">
-  <a href="cart.jsp">0</a>
+  <a href="toCart">0</a>
 </div>
 <!--fixedNav:footer-->
 <div style="height:1.2rem;"></div>
 <nav>
-  <a href="index.jsp" class="homeIcon">首页</a>
+  <a href="index" class="homeIcon">首页</a>
   <a href="category" class="categoryIcon">分类</a>
-  <a href="cart.jsp" class="cartIcon">购物车</a>
+  <a href="toCart" class="cartIcon" >购物车</a>
   <a href="user.jsp" class="userIcon">我的</a>
 </nav>
 </body>

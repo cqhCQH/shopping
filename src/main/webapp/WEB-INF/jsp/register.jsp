@@ -26,12 +26,28 @@
 <link rel="stylesheet" type="text/css" href="../../css/style.css" />
 <script src="../../js/jquery.js"></script>
 <script>
-$(document).ready(function(){
-   $(".formarea li:last input[type='button']").click(function(){
-	   alert("测试跳转效果，程序对接予以删除!");
-	   location.href="login.jsp";
-	   });	
-});
+ $(document).ready(function(){
+
+  $("#che").click(function() {
+   $.ajax({url: "/check"});
+   alert("成功发送");
+  })
+
+  $("#zhuce1").click(function() {
+   var tel1 = $("#tel").val();
+   var che1=$("#che2").val();
+   var data={tel:tel1,che:che1};
+   $.getJSON("/zhuce1",data,function(result){
+    if(result.sign==0)
+    {alert("注册成功,点击确定以跳转登陆界面");
+     self.location.href="/login"}
+
+    else
+    {alert("注册失败");
+    self.location.href="/register"}
+   })
+  })
+ });
 </script>
 </head>
 <body>
@@ -40,23 +56,23 @@ $(document).ready(function(){
  <a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
  <h1>注册</h1>
 </header>
-<mark class="formMark">这里可以放置提示性语句！</mark>
+<mark class="formMark">新用户注册</mark>
 <ul class="formarea">
  <li>
   <label class="lit">账号：</label>
-  <input type="tel" placeholder="手机号码" class="textbox" placeholder="HZIT"/>
+  <input type="tel" placeholder="手机号码" class="textbox" placeholder="HZIT"id="tel"/>
  </li>
- <li style="padding:0;"><a class="checkCode">获取手机校验码</a></li>
+ <li style="padding:0;"><a class="checkCode" id="che">获取手机校验码</a></li>
  <li>
   <label class="lit">校验码：</label>
-  <input type="number" placeholder="输入六位校验码" class="textbox"/>
+  <input type="number" id="che2" placeholder="输入六位校验码" class="textbox"/>
  </li>
  <li class="liLink">
-  <a href="article.jsp" class="fl">《用户协议》</a>
-  <a href="login.jsp" class="fr">已有账号，登录</a>
+  <a href="article" class="fl">《用户协议》</a>
+  <a href="login" class="fr">已有账号，登录</a>
  </li>
  <li>
-  <input type="button" value="立即注册"/>
+  <input type="button" value="立即注册" id="zhuce1"/>
  </li>
 </ul>
 <!--fixedNav:footer-->

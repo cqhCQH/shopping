@@ -21,4 +21,5 @@ public interface GoodsInfoService {
     Goodsinfo findGoodsById(int goodid);
     List<Goodsinfo> findGoodsByCategory(Integer categoryid,String orderby,int page);
     List<Goodsinfo> findByCategory(Integer categoryid);
+    List<Goodsinfo> findAllGoodsByKey(String goodsName);
 }

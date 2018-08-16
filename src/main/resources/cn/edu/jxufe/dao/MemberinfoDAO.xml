@@ -25,10 +25,7 @@
     member_login_ip, member_old_login_ip, is_sell, member_state, member_pic
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from memberinfo
-    where member_id = #{memberId,jdbcType=INTEGER}
+    select * from memberinfo where member_id = #{memberId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from memberinfo
@@ -221,4 +218,26 @@
       member_pic = #{memberPic,jdbcType=VARCHAR}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
+  <select id="selectMemberById" resultMap="BaseResultMap" parameterType="cn.edu.jxufe.dao.MemberinfoDAO">
+  select  * from  memberinfo where member_mobile=#{memberMobile} and member_passwd=#{memberPasswd}
+  </select>
+  <insert id="zhuce"  parameterType="cn.edu.jxufe.dao.MemberinfoDAO">
+    insert into memberinfo(member_mobile,member_name) values(#{memberMobile},"1")
+  </insert>
+  <update id="find_pwd" parameterType="cn.edu.jxufe.dao.MemberinfoDAO">
+    update memberinfo set member_Passwd=#{memberPasswd} where member_mobile=#{memberMobile}
+  </update>
+  <select id="find_pwd2"  resultMap="BaseResultMap" parameterType="cn.edu.jxufe.dao.MemberinfoDAO">
+    select *from memberinfo where member_mobile=#{memberMobile}
+  </select>
+  <update id="changeName" parameterType="String">
+    update memberinfo set member_name=#{memberName} where member_mobile=#{TEL}
+  </update>
+  <select id="findUserIDByTel" parameterType="String" resultType="String">
+    SELECT member_name FROM memberinfo where member_mobile=#{memberMobile}
+  </select>
+
+  <select id="findUserByTel" parameterType="String" resultType="cn.edu.jxufe.dao.MemberinfoDAO">
+    SELECT * FROM memberinfo where member_mobile=#{memberMobile}
+  </select>
 </mapper>

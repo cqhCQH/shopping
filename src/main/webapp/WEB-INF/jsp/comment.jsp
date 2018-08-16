@@ -26,23 +26,48 @@
 <link rel="stylesheet" type="text/css" href="../../css/style.css" />
 <script src="../../js/jquery.js"></script>
  <script>
-  var goodsID;
-  function addComment(gid){
-
-   url="commentinfo"+gid;
-   var li=$(".model")
-   $post(url,function(data){
-       for(var i=0;i<data.length;i++){
-           goodsID=data[i].goodsId;
-           li.find(".user_infor").find("span:eq(0)").find("img").attr("src","upload/"+data[i].scommMemberavatar);
-           li.find(".user_infor").find("span:eq(1)").find("em").html(data[i].scommMembername);
-           li.find(".user_infor").find("span:eq(1)").find("time").html(data[i].createTime);
-           li.find(".comment_cont_txt").html(data[i].scommContent);
-          $(".comment_cont ul").append("<li>"+li.html()+"</li>");
+     $(document).ready(
+         shuaxin(${gid})
+     )
+   function submit() {
+    var context=document.getElementById('context').value;
+    var url="commentTest";
+       if(context!=""){
+           alert("评论成功！^-^")
+    $.ajax({
+     type:"post",
+     url:url,
+     contentType:"application/json",
+     data:JSON.stringify({"goodisId":"${gid}","scommContent":context,"scommMembername":"${userName}"}),
+     success:function(){
+             shuaxin(${gid});
+     },
+     error:function(){
+      console.log('提交失败')
+     }
+    }
+    );
+       }else{
+       alert("评论为空，请重新输入！");
+           shuaxin(${gid});
        }
-   })
-  }
+    };
 
+  function shuaxin(gidd){
+   url="comment_list/"+gidd;
+   $.post(url,function(data){
+               $(".comment_cont ul li:gt(0)").remove();
+            var li=$("#model");
+            for(var i=0;i<data.length;i++){
+            li.find("span").eq(0).find("img").attr("src",data[i].scommMemberavatar);
+            li.find("span:eq(1) em").html(" "+data[i].scommMembername);
+            li.find("span:eq(1) time").html(data[i].scommTime);
+            li.find(".comment_cont_txt").html(data[i].scommContent);
+            $(".comment_cont ul").append("<li>"+li.html()+"</li>");
+           }
+           }
+   )
+  }
  </script>
 </head>
 <body>
@@ -52,23 +77,22 @@
  <h1>点评</h1>
 </header>
 <div class="comment_input">
- <textarea placeholder="输入评论内容..." name="context"></textarea>
- <input type="button" value="评论" onclick="location.href='addComment?=${goodsID}'"/>
+ <textarea placeholder="输入评论内容..." id="context"></textarea>
+ <input type="button" value="评论" id="submit" onclick="javascript:submit()"/>
 </div>
 <div class="comment_cont">
  <ul>
-  <li class="model">
+  <li id="model" style="display: none">
    <div class="user_infor">
-    <span class="user_pic"><img src="${c.scommMemberavatar}"/></span>
+    <span class="user_pic"><img src=""/></span>
     <span class="rt_infor">
-     <em>${c.scommMembername}</em>
-     <time>${c.createTime}</time>
+     <em>&nbsp;</em>
+     <time>1111111</time>
     </span>
    </div>
-   <div class="comment_cont_txt">${c.scommContent}</div>
+   <div class="comment_cont_txt"></div>
   </li>
  </ul>
 </div>
-
 </body>
 </html>

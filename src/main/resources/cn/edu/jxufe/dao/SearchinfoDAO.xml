@@ -24,7 +24,7 @@
     insert into searchinfo (s_id, search_key, member_id, 
       searchTime)
     values (#{sId,jdbcType=INTEGER}, #{searchKey,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
-      #{searchtime,jdbcType=TIMESTAMP})
+      sysdate())
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.jxufe.entity.Searchinfo">
     insert into searchinfo
@@ -79,4 +79,8 @@
       searchTime = #{searchtime,jdbcType=TIMESTAMP}
     where s_id = #{sId,jdbcType=INTEGER}
   </update>
+
+  <select id="findGoodsByKey" resultMap="BaseResultMap" parameterType="String">
+    SELECT * FROM searchinfo WHERE search_key =#{searchKey}
+  </select>
 </mapper>

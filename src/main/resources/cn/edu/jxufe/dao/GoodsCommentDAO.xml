@@ -9,8 +9,8 @@
     <result column="scomm_membername" jdbcType="VARCHAR" property="scommMembername" />
     <result column="scomm_memberavatar" jdbcType="VARCHAR" property="scommMemberavatar" />
     <result column="scomm_time" jdbcType="VARCHAR" property="scommTime" />
-    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="create_time"  property="createTime" />
+    <result column="update_time"  property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
     scomm_id, goodis_id, scomm_content, scomm_memberid, scomm_membername, scomm_memberavatar, 
@@ -33,7 +33,7 @@
       )
     values (#{scommId,jdbcType=INTEGER}, #{goodisId,jdbcType=INTEGER}, #{scommContent,jdbcType=VARCHAR},
       #{scommMemberid,jdbcType=INTEGER}, #{scommMembername,jdbcType=VARCHAR}, #{scommMemberavatar,jdbcType=VARCHAR}, 
-      #{scommTime,jdbcType=VARCHAR},#{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      sysdate(),sysdate(), #{updateTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.jxufe.entity.GoodsComment">
@@ -150,6 +150,6 @@
         goodis_id=#{goodid}
       </if>
     </where>
-    ORDER BY scomm_time
+    ORDER BY scomm_time DESC
   </select>
 </mapper>

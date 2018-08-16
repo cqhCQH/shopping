@@ -26,12 +26,28 @@
 <link rel="stylesheet" type="text/css" href="../../css/style.css" />
 <script src="../../js/jquery.js"></script>
 <script>
-$(document).ready(function(){
-   $(".formarea li:last input[type='button']").click(function(){
-	   alert("测试跳转效果，程序对接予以删除!");
-	   location.href="login.jsp";
-	   });	
-});
+ $(document).ready(function(){
+  $("#che1").click(function() {
+   $.ajax({url: "/check"});
+   alert("成功发送");
+  })
+
+  $("#change").click(function(){
+   var tel=$("#tel").val();
+   var che=$("#che").val();
+   var pwd1=$("#pwd1").val();
+   var pwd2=$("#pwd2").val();
+   var data={tel:tel,che:che,pwd1:pwd1,pwd2:pwd2}
+   $.getJSON("/findpwd",data,function(result){
+    if(result.sign==0){
+     alert("修改成功,点击确定以跳转登陆界面")
+     self.location.href="/page_login"}
+    else{
+     alert("修改失败")
+     self.location.href="/page_find_pwd"}
+   });
+  });
+ });
 </script>
 </head>
 <body>
@@ -39,26 +55,27 @@ $(document).ready(function(){
  <a href="javascript:history.go(-1);" class="iconfont backIcon">&#60;</a>
  <h1>找回密码</h1>
 </header>
+<mark class="formMark">请确保两次密码一致</mark>
 <ul class="formarea">
  <li>
   <label class="lit">账号：</label>
-  <input type="text" placeholder="手机号码" class="textbox"/>
+  <input type="text" placeholder="手机号码" id="tel" class="textbox"/>
  </li>
- <li style="padding:0;"><a class="checkCode">获取手机校验码</a></li>
+ <li style="padding:0;"><a class="checkCode" id="che1">获取手机校验码</a></li>
  <li>
   <label class="lit">校验码：</label>
-  <input type="text" placeholder="六位校验码" class="textbox"/>
+  <input type="text" placeholder="六位校验码"  id="che" class="textbox"/>
  </li>
  <li>
   <label class="lit">新密码：</label>
-  <input type="password" placeholder="设置新密码" class="textbox"/>
+  <input type="password" placeholder="设置新密码"  id="pwd1" class="textbox"/>
  </li>
  <li>
   <label class="lit">确认密码：</label>
-  <input type="password" placeholder="确认新密码" class="textbox"/>
+  <input type="password" placeholder="确认新密码" id="pwd2" class="textbox"/>
  </li>
  <li>
-  <input type="button" value="立即修改"/>
+  <input type="button" id="change" value="立即修改"/>
  </li>
 </ul>
 <!--fixedNav:footer-->

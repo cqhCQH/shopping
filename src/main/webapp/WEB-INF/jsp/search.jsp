@@ -34,6 +34,45 @@ $(document).ready(function(){
 		  }
 	  });	
 });
+
+    function searchGoods(){
+        var searchTxt=document.getElementById('searchText').value;
+        url="searchinfo";
+        $.ajax({
+            type:"post",
+            url:url,
+            contentType:"application/json",
+            data:JSON.stringify({"sId":5,"searchKey":searchTxt,"memberId":1}),
+            success:function(){
+                console.log('查询成功');
+                viewGoods(searchTxt);
+            },
+            error:function(){
+                console.log('查询失败');
+            }
+        }
+)
+    }
+
+    function viewGoods(searchtxt){
+        url="searchShow";
+        var li=$("#view_goods");
+        $.post(url,{"searchtxt":searchtxt},function(data){
+            for(var i=0;i<data.length;i++){
+                 li.find("a").eq(0).attr("href","goodsinfo"+data[i].goodsId);
+                 li.find("a").eq(0).find("img").attr("src",data[i].goodsImage);
+                 li.find("h2").find("a").attr("href","goodsinfo"+data[i].goodsId);
+                 li.find("p;eq(0) del").html(data[i].goodsPrice);
+                 li.find("p:eq(1) strong").html(data[i].goodsSellPrice)
+                 li.find(".addTocart").attr("title",data[i].goodsId);
+                 li.find("aside").find(".like_icon").html(data[i].thumbsUpNum);
+                 li.find("aside").find(".comment_icon").html(data[i].commentNum);
+                 li.find("aside").find(".deal_icon").html(data[i].goodsCollectNum);
+                 $(".goods_cont ul").append("<li>"+li.html()+"</li>");
+            }
+                }
+        )
+    }
 </script>
 </head>
 <body>
@@ -43,8 +82,8 @@ $(document).ready(function(){
  <h1>搜索</h1>
 </header>
 <aside class="searchArea">
- <input type="text" placeholder="查找玻璃品..."/>
- <input type="button" value="&#63;" class="searchBtn"/>
+ <input type="text" placeholder="查找玻璃品..." id="searchText"/>
+ <input type="button" value="&#63;" class="searchBtn" onclick="javascript:searchGoods()"/>
 </aside>
 <dl class="searchHistory">
  <dt>历史搜索</dt>
@@ -60,5 +99,34 @@ $(document).ready(function(){
   <a>清空历史记录</a>
  </dd>
 </dl>
+<dd class="goods_cont">
+    <ul id="model" style="display: none">
+
+        <li id="view_goods">
+                <div class="search_goods">
+                    <a href="" class="goodsPic">
+                        <img src=""/>
+                    </a>
+                    <div class="">
+                        <h2>
+                            <a href=""></a>
+                        </h2>
+                        <p>
+                            <del></del>
+                        </p>
+                        <p>
+                            <strong class="price"></strong>
+                        </p>
+                        <a class="addToCart" title="">&#126;</a>
+                    </div>
+                </div>
+                <aside>
+                    <a class="like_icon">0</a>
+                    <a class="comment_icon">0</a>
+                    <a class="deal_icon">0</a>
+                </aside>
+            </li>
+    </ul>
+</dd>
 </body>
 </html>

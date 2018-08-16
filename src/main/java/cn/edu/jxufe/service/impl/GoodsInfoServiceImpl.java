@@ -38,4 +38,9 @@ public class GoodsInfoServiceImpl implements GoodsInfoService{
         PageHelper.orderBy(orderby);
         return findByCategory(categoryid);
     }
+
+    @Override
+    public List<Goodsinfo> findAllGoodsByKey(String goodsName){
+        return goodsinfoDAO.findAllGoodsByKey(goodsName);
+    }
 }

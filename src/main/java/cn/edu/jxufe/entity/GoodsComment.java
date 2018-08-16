@@ -46,12 +46,12 @@ public class GoodsComment implements Serializable {
     /**
      * 创建时间
      */
-    private Long createTime;
+    private String createTime;
 
     /**
      * 修改时间
      */
-    private Long updateTime;
+    private String updateTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -111,19 +111,19 @@ public class GoodsComment implements Serializable {
         this.scommTime = scommTime;
     }
 
-    public Long getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Long createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Long getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Long updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

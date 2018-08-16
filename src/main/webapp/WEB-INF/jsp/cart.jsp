@@ -45,19 +45,36 @@ $(document).ready(function(){
 	  if(currNum.val()<=1){
 		  $(this).parents("dd").remove();
 		  nullTips();
-		  }else{
-			  currNum.val(parseInt(currNum.val())-1);
-			  }
+       $.post("updateCart", {goodsid: $(this).attr("title"), flag: "del"}, function (data) {
+        $(".cart_icon em").html(data.get("totalcount"));
+        $("#price").html("总价格：￥"+data.get("totalprice"));
+       });
+		  }else {
+       currNum.val(parseInt(currNum.val()) - 1);
+       $.post("updateCart", {goodsid: $(this).attr("title"), flag: "-"}, function (data) {
+           $(".cart_icon em").html(data.get("totalcount"));
+           $("#price").html("总价格：￥"+data.get("totalprice"));
+       });
+      }
 	  });
   //plus
   $(".plus").click(function(){
 	  var currNum=$(this).siblings(".number");
 	  currNum.val(parseInt(currNum.val())+1);
+      $.post("updateCart", {goodsid: $(this).attr("title"), flag: "+"}, function (data) {
+          $(".cart_icon em").html(data.get("totalcount"));
+          $("#price").html("总价格：￥"+data.get("totalprice"));
+     });
 	  });
   //delBtn
   $(".delBtn").click(function(){
 	  $(this).parent().remove();
 	  nullTips();
+   $.post("updateCart", {goodsid: $(this).attr("title"), flag: "del"}, function (data) {
+    alert(data);
+       $(".cart_icon em").html(data.get("totalcount"));
+       $("#price").html("总价格：￥"+data.get("totalprice"));
+   });
 	  });
   //isNull->tips
   function nullTips(){
@@ -77,77 +94,38 @@ $(document).ready(function(){
  <h1>购物车</h1>
 </header>
 <dl class="cart">
- <dt>
-  <label><input type="checkbox"/>全选</label>
-  <a class="edit">编辑</a>
- </dt>
+ <c:set var="count" value="0"></c:set>
+ <c:set var="totalMoney" value="0"></c:set>
+ <c:forEach items="${cart}" var="ca">
+  <c:set var="count" value="${count+ca.value.count}"></c:set>
+  <c:set var="totalMoney" value="${totalMoney+ca.value.count*ca.value.goodsinfo.goodsSellPrice}"></c:set>
  <dd>
-  <input type="checkbox"/>
-  <a href="product.jsp" class="goodsPic"><img src="../../upload/4.webp.jpg"/></a>
+  <a href="goodsinfo${ca.value.goodsinfo.goodsId}" class="goodsPic"><img src="${ca.value.goodsinfo.goodsImage}"/></a>
   <div class="goodsInfor">
    <h2>
-    <a href="product.jsp">聚财貔貅风水摆件</a>
-    <span>1</span>
+    <a href="goodsinfo${ca.value.goodsinfo.goodsId}">${ca.value.goodsinfo.goodsName}</a>
+  <%--  //<span>1</span>--%>
    </h2>
    <div class="priceArea">
-    <strong>0.00</strong>
-    <del>0.00</del>
+    <strong>${ca.value.goodsinfo.goodsSellPrice}</strong>
+    <del>${ca.value.goodsinfo.goodsPrice}</del>
    </div>
    <div class="numberWidget">
-    <input type="button" value="-" class="minus"/>
-    <input type="text" value="1" disabled  class="number"/>
-    <input type="button" value="+"  class="plus"/>
+    <input type="button" value="-" class="minus" title="${ca.value.goodsinfo.goodsId}"/>
+    <input type="text" value="${ca.value.count}" disabled  class="number"/>
+    <input type="button" value="+"  class="plus" title="${ca.value.goodsinfo.goodsId}"/>
    </div>
   </div>
-  <a class="delBtn">删除</a>
+  <a class="delBtn" title="${ca.value.goodsinfo.goodsId}">删除</a>
  </dd>
- <dd>
-  <input type="checkbox"/>
-  <a href="product.jsp" class="goodsPic"><img src="../../upload/2.webp.jpg"/></a>
-  <div class="goodsInfor">
-   <h2>
-    <a href="product.jsp">烟灰缸 玻璃工艺品...</a>
-    <span>1</span>
-   </h2>
-   <div class="priceArea">
-    <strong>0.00</strong>
-    <del>0.00</del>
-   </div>
-   <div class="numberWidget">
-    <input type="button" value="-" class="minus"/>
-    <input type="text" value="1" disabled class="number"/>
-    <input type="button" value="+" class="plus"/>
-   </div>
-  </div>
-  <a class="delBtn">删除</a>
- </dd>
- <dd>
-  <input type="checkbox"/>
-  <a href="product.jsp" class="goodsPic"><img src="../../upload/3.webp.jpg"/></a>
-  <div class="goodsInfor">
-   <h2>
-    <a href="product.jsp">迷你花杯 送底座</a>
-    <span>1</span>
-   </h2>
-   <div class="priceArea">
-    <strong>0.00</strong>
-    <del>0.00</del>
-   </div>
-   <div class="numberWidget">
-    <input type="button" value="-" class="minus"/>
-    <input type="text" value="1" disabled  class="number"/>
-    <input type="button" value="+" class="plus"/>
-   </div>
-  </div>
-  <a class="delBtn">删除</a>
- </dd>
+ </c:forEach>
 </dl>
 <!--bottom nav-->
 <div style="height:1rem;"></div>
 <aside class="btmNav">
  <ul>
-  <li><a class="cart_icon"><em>0</em></a></li>
-  <li><a>合计：￥0.00</a></li>
+  <li><a class="cart_icon"><em>${count}</em></a></li>
+  <li ><a id="price">${totalMoney}</a></li>
   <li><a href="confirm_order.jsp">立即下单</a></li>
  </ul>
 </aside>

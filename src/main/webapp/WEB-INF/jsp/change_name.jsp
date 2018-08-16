@@ -25,6 +25,23 @@
 <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="../../css/style.css" />
 <script src="../../js/jquery.js"></script>
+ <script>
+  $(document).ready(function(){
+   $("#change").click(function(){
+    var name=$("#name").val();
+    var data={name:name};
+    $.getJSON("/changeName",data,function(result){
+     if(result.sign==1){
+      alert("修改成功");
+     self.location.href("/page_index")}
+     else
+      alert("修改失败");
+   });
+   });
+
+
+  });
+ </script>
 </head>
 <body>
 <!--header-->
@@ -33,8 +50,8 @@
  <h1>用户昵称</h1>
 </header>
 <ul class="userForm">
- <li><input type="text" value="" placeholder="设置用户名"/></li>
- <li><input type="button" value="更新保存" class="formLastBtn"/></li>
+ <li><input type="text" value="" id="name" placeholder="设置用户名"/></li>
+ <li><input type="button" value="更新保存" id="change" class="formLastBtn"/></li>
 </ul>
 </body>
 </html>

@@ -25,6 +25,14 @@
 <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="../../css/style.css" />
 <script src="../../js/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $().click(function(){
+
+            })
+
+        });
+    </script>
 </head>
 <body>
 <!--header-->
@@ -73,8 +81,9 @@
     var reader = new FileReader(); 
     reader.readAsDataURL(file); 
     reader.onload = function(e){ 
-        showImg.innerHTML ='<img src="'+this.result+'"/>' ;
-    } 
+        //showImg.innerHTML ='<img src="'+this.result+'"/>' ;
+        showImg.getElementsByTagName("img")[0].src=this.result;
+    }
  } 
  </script>
 </body>

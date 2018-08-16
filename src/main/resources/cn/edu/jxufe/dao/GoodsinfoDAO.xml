@@ -296,4 +296,8 @@
       </if>
     </where>
   </select>
+
+  <select id="findAllGoodsByKey" parameterType="String" resultMap="BaseResultMap">
+    SELECT * FROM goodsinfo WHERE goods_Name like cancat('%',goodsName,'%')
+  </select>
 </mapper>
